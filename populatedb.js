@@ -10,9 +10,9 @@ if (!userArgs[0].startsWith('mongodb')) {
 }
 */
 var async = require('async')
-const User = require('./src/models/user')
-const Post = require('./src/models/post')
-const Comment = require('./src/models/comment')
+const User = require('./models/user')
+const Post = require('./models/post')
+const Comment = require('./models/comment')
 
 
 var mongoose = require('mongoose');
