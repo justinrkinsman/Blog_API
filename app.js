@@ -12,7 +12,7 @@ const bcrypt = require('bcryptjs')
 const { body, validationResult, check } = require('express-validator')
 const async = require("async")
 
-const app = expres()
+const app = express()
 
 // Set up mongoose connection
 const mongoose = require("mongoose")
@@ -21,6 +21,7 @@ const mongoDB = dev_db_url
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
 db.on("error", console.error.bind(console, "MongoDB connection error:"))
+mongoose.set('strictQuery', true)  // This may cause problems
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,4 +31,7 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/public'))
 
 app.get('/', (req, res, next) => {
+    res.send('hello')
 })
+
+module.exports = app
