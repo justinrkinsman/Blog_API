@@ -80,9 +80,20 @@ router.post('/sign-up', [
   }
 ])
 
+/// LOGIN ROUTES ///
+
 /* GET login page */
 router.get('/login', function(req, res, next) {
   res.render('login.pug', {title: "Log In"})
+})
+
+/* Failed login */
+router.get('/failed-login', function(req, res, next) {
+  res.render('failed-login.pug', {title: "Log-in Attempt Failed"})
+})
+
+router.get('/success-login', (req, res, next) => {
+  res.render('success-login.pug', {title: 'ur winner'})
 })
 
 module.exports = router;

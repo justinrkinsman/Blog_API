@@ -3,3 +3,14 @@ extends layout
 block content
     a(href='/') Back to home page
     h1 Login
+    form(action="" method='POST')
+        div.form-group 
+            label(for='username') Email: 
+            input#username.form-control(type='text', placeholder='example@www.com' name='username')
+            label(for='password') Password: 
+            input#password.form-control(type='password', name='password')
+        button.btn.btn-primary(type='submit') Submit
+    if errors 
+        ul 
+            for error in errors 
+                li!= error.msg
