@@ -31,6 +31,8 @@ app.set('view engine', 'ejs')
 app.set('view engine', 'pug');
 
 app.use(express.static(__dirname + '/public'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 app.use('/', indexRouter)
 
