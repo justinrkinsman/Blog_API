@@ -7,6 +7,7 @@ const session = require("cookie-session")
 const passport = require("passport")
 const LocalStrategy = require('passport-local').Strategy
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
 const logger = require('morgan');
 const bcrypt = require('bcryptjs')
 const { body, validationResult, check } = require('express-validator')
@@ -16,7 +17,31 @@ const cors = require('cors')
 
 const indexRouter = require('./routes/index')
 
+const Post = require('./models/post')
+const Comment = require('./models/comment')
+const User = require('./models/user')
+
 const app = express()
+
+post_count = function(callback) {
+    Post.countDocuments({}, callback)
+}
+
+comment_count = function(callback) {
+    Comment.countDocuments({}, callback)
+}
+    
+user_count = function(callback) {
+    User.countDocuments({}, callback)
+}
+
+app.use((req, res, next) => {
+    const data = dataCount()
+    req.context = {
+        me: data,
+    }
+    next()
+})
 
 // Set up mongoose connection
 const mongoose = require("mongoose")
@@ -36,12 +61,14 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     req.context = {
-        models: "hello"
+        posts,
+        me: models.posts[0]
     }
     next()
-})
+})*/
+app.use(bodyParser.json())
 
 app.use('/', indexRouter)
 
