@@ -8,10 +8,9 @@ const User = require('../models/user')
 const Post = require('../models/post')
 const Comment = require('../models/comment')
 
-router.get('/api', (req, res) => {
-  res.json({
-    message: "Welcome to the Home Page"
-  })
+/* Home Page */
+router.get('/', (req, res) => {
+  return res.send(Object.values(req.context.models))
 })
 
 module.exports = router;
