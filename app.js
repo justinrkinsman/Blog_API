@@ -23,26 +23,6 @@ const User = require('./models/user')
 
 const app = express()
 
-post_count = function(callback) {
-    Post.countDocuments({}, callback)
-}
-
-comment_count = function(callback) {
-    Comment.countDocuments({}, callback)
-}
-    
-user_count = function(callback) {
-    User.countDocuments({}, callback)
-}
-
-app.use((req, res, next) => {
-    const data = dataCount()
-    req.context = {
-        me: data,
-    }
-    next()
-})
-
 // Set up mongoose connection
 const mongoose = require("mongoose")
 const dev_db_url = process.env.MONGO_URL
@@ -95,5 +75,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500)
     res.render('error.pug')
 })
+
+app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`))
 
 module.exports = app
