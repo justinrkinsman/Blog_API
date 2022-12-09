@@ -30,13 +30,19 @@ router.get('/success-login', (req, res) => {
     return res.render('success-login.pug')
 })
 
+/// POST ROUTES ///
+
 router.post('/', (req, res) => {
     return res.send("Received a POST HTTP method")
 })
 
+/// UPDATE ROUTES ///
+
 router.put('/', (req, res) => {
     return res.send("Received a PUT HTTP method")
 })
+
+/// DELETE ROUTES ///
 
 router.delete('/', (req, res) => {
     return res.send("Received a DELETE HTTP method")
