@@ -1,12 +1,14 @@
 var express = require('express');
 var router = express.Router();
-
-/* ///This belongs somewhere in here I think
 const async = require('async')
 const User = require('../models/user')
+const Comment = require('../models/comment')
+const Post = require('../models/post')
 
-User.countDocuments({}).then((user_count) =>{console.log(user_count)})
-*/
+/// THIS WORKS ///
+const users = User.countDocuments({}).then((user_count) =>{console.log(`Users: ${user_count}`)})
+const post = Post.countDocuments({}).then((post_count) =>{console.log(`Posts: ${post_count}`)})
+const comment = Comment.countDocuments({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
 
 /// GET Routes ///
 

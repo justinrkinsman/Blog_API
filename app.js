@@ -76,8 +76,6 @@ app.use(function (err, req, res, next) {
     res.render('error.pug')
 })
 
-User.countDocuments({}).then((user_count) =>{console.log(user_count)})
-
 app.listen(process.env.PORT, () => console.log(`Example app listening on port ${process.env.PORT}!`))
 
 module.exports = app
