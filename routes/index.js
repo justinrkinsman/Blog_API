@@ -6,15 +6,16 @@ const Comment = require('../models/comment')
 const Post = require('../models/post')
 
 /// THIS WORKS ///
-const users = User.find({username: "justin@kinsman.com" }).then((user_count) =>{console.log(`Users: ${user_count}`)})
-const post = Post.find({}).then((post_count) =>{console.log(`Posts: ${post_count}`)})
-const comment = Comment.find({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
+/// Try putting these inside router.get('/')
+const users = User.find({}).then((user_count) =>{console.log(`Users: ${user_count}`)})
+const posts = Post.find({}).then((post_count) =>{console.log(`Posts: ${post_count}`)})
+const comments = Comment.find({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
 
 /// GET Routes ///
 
 /* GET home page */
 router.get('/', (req, res) => {
-    return res.render("index.pug", { title: "Home Page" })
+    return res.send({users, posts, comments})
 })
 
 /* GET login page */
