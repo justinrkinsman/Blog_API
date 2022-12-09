@@ -6,9 +6,9 @@ const Comment = require('../models/comment')
 const Post = require('../models/post')
 
 /// THIS WORKS ///
-const users = User.countDocuments({}).then((user_count) =>{console.log(`Users: ${user_count}`)})
-const post = Post.countDocuments({}).then((post_count) =>{console.log(`Posts: ${post_count}`)})
-const comment = Comment.countDocuments({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
+const users = User.find({username: "justin@kinsman.com" }).then((user_count) =>{console.log(`Users: ${user_count}`)})
+const post = Post.find({}).then((post_count) =>{console.log(`Posts: ${post_count}`)})
+const comment = Comment.find({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
 
 /// GET Routes ///
 
