@@ -1,6 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+/* ///This belongs somewhere in here I think
+const async = require('async')
+const User = require('../models/user')
+
+User.countDocuments({}).then((user_count) =>{console.log(user_count)})
+*/
+
 /// GET Routes ///
 
 /* GET home page */
