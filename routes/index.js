@@ -21,7 +21,7 @@ router.get('/posts', (req, res) => {
 
 router.get('/posts/:id', (req, res) => {
     const { id } = req.params
-    return res.json(req.body)
+    const post = Post.find({_id: id}).then((found_post) => {res.json(found_post)})
 })
 
 router.get('/posts/:id/comments', (req, res) => {
