@@ -6,7 +6,6 @@ const Comment = require('../models/comment')
 const Post = require('../models/post')
 
 const users = User.find({}).then((user_count) =>{console.log(`Users: ${user_count}`)})
-const posts = Post.find({}).then((post_count) =>{console.log(`Posts: ${post_count}`)})
 const comments = Comment.find({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
 
 /// GET Routes ///
@@ -17,7 +16,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/posts', (req, res) => {
-    return res.json({users, posts, comments})
+    const posts = Post.find({}).then((post_count) =>{res.json(post_count)})
 })
 
 router.get('/posts/:id', (req, res) => {
