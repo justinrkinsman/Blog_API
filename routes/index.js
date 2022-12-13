@@ -20,6 +20,16 @@ router.get('/posts', (req, res) => {
     return res.json({users, posts, comments})
 })
 
+router.get('/posts/:id', (req, res) => {
+    const { id } = req.params
+    return res.json(req.body)
+})
+
+router.get('/posts/:id/comments', (req, res) => {
+    const { postId } = req.params;
+    res.json(comments)
+})
+
 /* GET login page */
 router.get('/login', (req, res) => {
     return res.render("login.pug", { title: "Log In" })
