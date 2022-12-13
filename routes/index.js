@@ -44,20 +44,22 @@ router.get('/success-login', (req, res) => {
 
 /// POST ROUTES ///
 
-router.post('/', (req, res) => {
-    return res.send("Received a POST HTTP method")
+router.post('/posts', (req, res) => {
+    return res.json(req.body)
 })
 
 /// UPDATE ROUTES ///
 
-router.put('/', (req, res) => {
-    return res.send("Received a PUT HTTP method")
+router.put('/posts/:id', (req, res) => {
+    const { id } = req.params
+    return res.json(req.body)
 })
 
 /// DELETE ROUTES ///
 
-router.delete('/', (req, res) => {
-    return res.send("Received a DELETE HTTP method")
+router.delete('/posts/:id', (req, res) => {
+    const { id } = req.params
+    return res.json({ deleted: id })
 })
 
 module.exports = router
