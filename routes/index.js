@@ -25,8 +25,8 @@ router.get('/posts/:id', (req, res) => {
 })
 
 router.get('/posts/:id/comments', (req, res) => {
-    const { postId } = req.params;
-    res.json(comments)
+    const { id } = req.params;
+    const comments = Post.find({_id: id}).populate('comments').then((found_comments) => {res.json(found_comments)})
 })
 
 /* GET login page */
