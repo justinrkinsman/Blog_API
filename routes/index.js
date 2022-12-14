@@ -54,16 +54,14 @@ router.get('/success-login', (req, res) => {
 /// POST ROUTES ///
 // POST to create new blog post
 router.post('/posts', (req, res) => {
-    let date = new Date()
+    const date = new Date()
     postDetail = {
-        title: title,
-        body: body,
+        title: req.body.title,
+        body: req.body.body,
         timestamp: date,
-        published: true
+        published: req.body.published
     }
-
-    if (comments !== false) postDetail.comments = comments
-
+    
     let post = new Post(postDetail)
 
     post.save(function (err) {
@@ -72,7 +70,7 @@ router.post('/posts', (req, res) => {
             return
         }
     })
-    return Post.find({}).then((post_count) => {res.json(post_count)})
+    return res.redirect('/posts')
 })
 
 /// UPDATE ROUTES ///
