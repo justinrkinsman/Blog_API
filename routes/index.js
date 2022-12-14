@@ -130,8 +130,10 @@ router.post('/posts/:id/comments', (req, res) => {
 
 /// UPDATE ROUTES ///
 
+// Post update
 router.put('/posts/:id', (req, res) => {
-    return res.send(`Post number ${req.params.id} updated`)
+    const { id } = req.params
+    return res.send(`Post number ${id} updated`)
 })
 
 router.put('/posts/:id/comments/:commentId', (req, res) => {
