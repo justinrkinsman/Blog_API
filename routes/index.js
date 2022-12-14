@@ -52,9 +52,27 @@ router.get('/success-login', (req, res) => {
 })
 
 /// POST ROUTES ///
-
+// POST to create new blog post
 router.post('/posts', (req, res) => {
-    return res.json(req.body)
+    let date = new Date()
+    postDetail = {
+        title: title,
+        body: body,
+        timestamp: date,
+        published: true
+    }
+
+    if (comments !== false) postDetail.comments = comments
+
+    let post = new Post(postDetail)
+
+    post.save(function (err) {
+        if (err) {
+            cb(err, null)
+            return
+        }
+    })
+    return Post.find({}).then((post_count) => {res.json(post_count)})
 })
 
 /// UPDATE ROUTES ///
