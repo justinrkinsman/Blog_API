@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/posts', (req, res) => {
-    const posts = Post.find({}).then((post_count) =>{res.json(post_count)})
+    const posts = Post.find({}).then((post_count) => {res.json(post_count)})
 })
 
 router.get('/posts/:id', (req, res) => {
