@@ -74,8 +74,46 @@ router.post('/posts', (req, res) => {
 })
 
 // POST to add comment to post
+/// FIND A WAY TO LINK COMMENT TO POST ///
 router.post('/posts/:id/comments', (req, res) => {
-    res.send('Add comment to post')
+    const date = new Date()
+    
+    commentDetail = {
+        body: req.body.body,
+        timestamp: date,
+        user: "63921eef7ddc8d4b5ead4617"
+    }
+    
+    /// Something here isn't working
+    /*User.find({_id: "63921eef7ddc8d4b5ead4617"}).exec((err, found_username) => {
+        if (err) {
+            return next(err)
+        }
+        if (found_username) {
+            commentDetail.user = found_username
+        }
+    })*/
+
+    let comment = new Comment(commentDetail)
+
+    comment.save(function (err) {
+        //if (err) {
+            //cb(err, null)
+            return
+        //}
+    })
+
+    /* /// Real version
+    User.find({username: req.user.username}).exec((err, found_username) => {
+        if (err) {
+            return next(err)
+        }
+        if (found_username) {
+            commentDetail.user = found_username
+        }
+    })*/
+
+    res.redirect('/posts/:id/comments')
 })
 
 /// UPDATE ROUTES ///
