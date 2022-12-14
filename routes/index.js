@@ -104,6 +104,15 @@ router.post('/posts/:id/comments', (req, res) => {
         //}
     })
 
+    Post.findByIdAndUpdate(req.params.id, {_id: req.params.id, $push: {comments: comment}},
+        function(err, docs) {
+            if (err) {
+                console.log(err)
+            }else{
+                console.log('Update Post :', docs)
+            }
+        })
+
     /* /// Real version
     User.find({username: req.user.username}).exec((err, found_username) => {
         if (err) {
