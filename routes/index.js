@@ -73,6 +73,11 @@ router.post('/posts', (req, res) => {
     return res.redirect('/posts')
 })
 
+// POST to add comment to post
+router.post('/posts/:id/comments', (req, res) => {
+    res.send('Add comment to post')
+})
+
 /// UPDATE ROUTES ///
 
 router.put('/posts/:id', (req, res) => {
@@ -80,11 +85,19 @@ router.put('/posts/:id', (req, res) => {
     return res.json(req.body)
 })
 
+router.put('/posts/:id/comments/:commentId', (req, res) => {
+    return res.send('Update comment')
+})
+
 /// DELETE ROUTES ///
 
 router.delete('/posts/:id', (req, res) => {
     const { id } = req.params
     return res.json({ deleted: id })
+})
+
+router.delete('/posts/:id/comments/:commentId', (req, res) => {
+    return res.send('Delete comment')
 })
 
 module.exports = router
