@@ -7,6 +7,7 @@ const CommentSchema = new Schema({
     body: { type: String, required: true, minLength: 1 },
     timestamp: { type: Date, required: true },
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    post: { type: Schema.Types.ObjectId, ref: "Post", required: true },
 })
 
 CommentSchema.virtual("formatted_timestamp").get(function () {

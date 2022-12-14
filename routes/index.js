@@ -81,7 +81,8 @@ router.post('/posts/:id/comments', (req, res) => {
     commentDetail = {
         body: req.body.body,
         timestamp: date,
-        user: "63921eef7ddc8d4b5ead4617"
+        user: "63921eef7ddc8d4b5ead4617",
+        post: req.params.id
     }
     
     /// Something here isn't working
@@ -112,6 +113,8 @@ router.post('/posts/:id/comments', (req, res) => {
             commentDetail.user = found_username
         }
     })*/
+
+    Post.findByIdAndUpdate(req.params.id, )
 
     res.redirect('/posts/:id/comments')
 })
