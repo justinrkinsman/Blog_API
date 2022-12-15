@@ -74,7 +74,6 @@ router.post('/posts', (req, res) => {
 })
 
 // POST to add comment to post
-/// FIND A WAY TO LINK COMMENT TO POST ///
 router.post('/posts/:id/comments', (req, res) => {
     const date = new Date()
     
@@ -84,16 +83,6 @@ router.post('/posts/:id/comments', (req, res) => {
         user: "63921eef7ddc8d4b5ead4617",
         post: req.params.id
     }
-    
-    /// Something here isn't working
-    /*User.find({_id: "63921eef7ddc8d4b5ead4617"}).exec((err, found_username) => {
-        if (err) {
-            return next(err)
-        }
-        if (found_username) {
-            commentDetail.user = found_username
-        }
-    })*/
 
     let comment = new Comment(commentDetail)
 
@@ -112,18 +101,6 @@ router.post('/posts/:id/comments', (req, res) => {
                 console.log('Update Post :', docs)
             }
         })
-
-    /* /// Real version
-    User.find({username: req.user.username}).exec((err, found_username) => {
-        if (err) {
-            return next(err)
-        }
-        if (found_username) {
-            commentDetail.user = found_username
-        }
-    })*/
-
-    Post.findByIdAndUpdate(req.params.id, )
 
     res.redirect('/posts/:id/comments')
 })
