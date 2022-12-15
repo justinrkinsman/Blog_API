@@ -15,7 +15,7 @@ router.get('/posts', (req, res, next) => {
     fetch(requestUrl)
     .then(response => response.json())
     .then(data => {
-        return res.render('index.pug', { title: "Home Page", posts: JSON.stringify(data) })
+        return res.render('index.pug', { title: "Home Page", posts: data })
     })
     
 })
