@@ -15,16 +15,16 @@ router.get('/', (req, res, next) => {
     return res.redirect('/posts')
 })
 
-router.get('/posts', (req, res) => {
+router.get('/api/posts', (req, res) => {
     const posts = Post.find({}).then((post_count) => {res.json(post_count)})
 })
 
-router.get('/posts/:id', (req, res) => {
+router.get('/api/posts/:id', (req, res) => {
     const { id } = req.params
     const post = Post.find({_id: id}).then((found_post) => {res.json(found_post)})
 })
 
-router.get('/posts/:id/comments', (req, res) => {
+router.get('/api/posts/:id/comments', (req, res) => {
     const { id } = req.params;
     const comments = Post.find({_id: id}).populate('comments').then((found_comments) => {res.json(found_comments)})
 })
@@ -53,7 +53,7 @@ router.get('/success-login', (req, res) => {
 
 /// POST ROUTES ///
 // POST to create new blog post
-router.post('/posts', (req, res) => {
+router.post('/api/posts', (req, res) => {
     const date = new Date()
     postDetail = {
         title: req.body.title,
@@ -74,7 +74,7 @@ router.post('/posts', (req, res) => {
 })
 
 // POST to add comment to post
-router.post('/posts/:id/comments', (req, res) => {
+router.post('/api/posts/:id/comments', (req, res) => {
     const date = new Date()
     
     commentDetail = {
@@ -102,29 +102,29 @@ router.post('/posts/:id/comments', (req, res) => {
             }
         })
 
-    res.redirect('/posts/:id/comments')
+    res.redirect('/api/posts/:id/comments')
 })
 
 /// UPDATE ROUTES ///
 
 // Post update
-router.put('/posts/:id', (req, res) => {
+router.put('/api/posts/:id', (req, res) => {
     const { id } = req.params
     return res.send(`Post number ${id} updated`)
 })
 
-router.put('/posts/:id/comments/:commentId', (req, res) => {
+router.put('/api/posts/:id/comments/:commentId', (req, res) => {
     return res.send('Update comment')
 })
 
 /// DELETE ROUTES ///
 
-router.delete('/posts/:id', (req, res) => {
+router.delete('/api/posts/:id', (req, res) => {
     const { id } = req.params
     return res.json({ deleted: id })
 })
 
-router.delete('/posts/:id/comments/:commentId', (req, res) => {
+router.delete('/api/posts/:id/comments/:commentId', (req, res) => {
     return res.send('Delete comment')
 })
 
