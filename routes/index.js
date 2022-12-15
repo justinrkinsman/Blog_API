@@ -24,28 +24,6 @@ router.get('/api/posts/:id/comments', (req, res) => {
     const comments = Post.find({_id: id}).populate('comments').then((found_comments) => {res.json(found_comments)})
 })
 
-/* GET login page */
-router.get('/login', (req, res) => {
-    return res.render("login.pug", { title: "Log In" })
-})
-
-/* GET signup page */
-router.get('/sign-up', (req, res) => {
-    return res.render('sign-up.pug', { title: "Sign Up" })
-})
-
-/* GET failed login page */
-/// CHANGE THIS SO USERS CAN'T ACCESS IT MANUALLY ///
-router.get('/failed-login', (req, res) => {
-    return res.render('failed-login.pug', { title: "Log-in Attempt Failed" })
-})
-
-/* GET successful login page */
-/// REMOVE THIS LATER ///
-router.get('/success-login', (req, res) => {
-    return res.render('success-login.pug')
-})
-
 /// POST APIs ///
 // POST to create new blog post
 router.post('/api/posts', (req, res) => {
@@ -135,7 +113,7 @@ router.put('/api/posts/:id/comments/:commentId', (req, res) => {
 })
 
 /// DELETE APIs ///
-
+/// Delete post
 router.delete('/api/posts/:id', (req, res) => {
     const { id } = req.params
 
@@ -150,6 +128,7 @@ router.delete('/api/posts/:id', (req, res) => {
     return res.json({ deleted: id })
 })
 
+/// Delete comment
 router.delete('/api/posts/:id/comments/:commentId', (req, res) => {
     const commentId = req.params.commentId
     const id = req.params.id
