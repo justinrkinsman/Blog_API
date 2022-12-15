@@ -143,6 +143,15 @@ router.put('/api/posts/:id/comments/:commentId', (req, res) => {
 
 router.delete('/api/posts/:id', (req, res) => {
     const { id } = req.params
+
+    Post.findByIdAndDelete(id, (err, docs) => {
+        if (err) {
+            console.log(err)
+        }else{
+            console.log('Deleted: ', docs)
+        }
+    })
+
     return res.json({ deleted: id })
 })
 
