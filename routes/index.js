@@ -136,7 +136,7 @@ router.put('/api/posts/:id/comments/:commentId', (req, res) => {
             }
         })
 
-    return res.send(`Post: ${id}, Comment: ${commentId}`)
+    return res.send(`Comment number ${commentId} updated`)
 })
 
 /// DELETE ROUTES ///
