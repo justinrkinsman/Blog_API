@@ -110,7 +110,47 @@ router.post('/api/posts/:id/comments', (req, res) => {
 // Post update
 router.put('/api/posts/:id', (req, res) => {
     const { id } = req.params
+
+    Post.findByIdAndUpdate(req.params.id, {_id: req.params.id, title: req.body.title, body: req.body.body},
+        function(err, docs) {
+            if (err) {
+                console.log(err)
+            }else{
+                console.log('Update Post :', docs)
+            }
+        })
+    
     return res.send(`Post number ${id} updated`)
+
+    /*
+commentDetail = {
+        body: req.body.body,
+        timestamp: date,
+        user: "63921eef7ddc8d4b5ead4617",
+        post: req.params.id
+    }
+
+    let comment = new Comment(commentDetail)
+
+    comment.save(function (err) {
+        //if (err) {
+            //cb(err, null)
+            return
+        //}
+    })
+
+    Post.findByIdAndUpdate(req.params.id, {_id: req.params.id, $push: {comments: comment}},
+        function(err, docs) {
+            if (err) {
+                console.log(err)
+            }else{
+                console.log('Update Post :', docs)
+            }
+        })
+
+    res.redirect('/api/posts/:id/comments')
+    */
+
 })
 
 router.put('/api/posts/:id/comments/:commentId', (req, res) => {
