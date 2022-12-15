@@ -121,25 +121,13 @@ router.put('/api/posts/:id', (req, res) => {
         })
     
     return res.send(`Post number ${id} updated`)
+})
 
-    /*
-commentDetail = {
-        body: req.body.body,
-        timestamp: date,
-        user: "63921eef7ddc8d4b5ead4617",
-        post: req.params.id
-    }
+router.put('/api/posts/:id/comments/:commentId', (req, res) => {
+    const id = req.params.id
+    const commentId = req.params.commentId
 
-    let comment = new Comment(commentDetail)
-
-    comment.save(function (err) {
-        //if (err) {
-            //cb(err, null)
-            return
-        //}
-    })
-
-    Post.findByIdAndUpdate(req.params.id, {_id: req.params.id, $push: {comments: comment}},
+    Comment.findByIdAndUpdate(commentId, {_id: commentId, body: req.body.body},
         function(err, docs) {
             if (err) {
                 console.log(err)
@@ -148,13 +136,7 @@ commentDetail = {
             }
         })
 
-    res.redirect('/api/posts/:id/comments')
-    */
-
-})
-
-router.put('/api/posts/:id/comments/:commentId', (req, res) => {
-    return res.send('Update comment')
+    return res.send(`Post: ${id}, Comment: ${commentId}`)
 })
 
 /// DELETE ROUTES ///
