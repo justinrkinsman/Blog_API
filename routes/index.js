@@ -156,7 +156,27 @@ router.delete('/api/posts/:id', (req, res) => {
 })
 
 router.delete('/api/posts/:id/comments/:commentId', (req, res) => {
-    return res.send('Delete comment')
+    const commentId = req.params.commentId
+    const id = req.params.id
+
+    Comment.findByIdAndDelete(commentId, (err, docs) => {
+        if (err) {
+            console.log(err)
+        }else{
+            console.log('Deleted: ', docs)
+        }
+    })
+
+    Post.findByIdAndUpdate(req.params.id, {_id: req.params.id, $pull: {comments: commentId}},
+        function(err, docs) {
+            if (err) {
+                console.log(err)
+            }else{
+                console.log('Update Post :', docs)
+            }
+        })
+    
+    return res.send(`Deleted comment ${commentId}`)
 })
 
 module.exports = router
