@@ -8,7 +8,7 @@ const Post = require('../models/post')
 const users = User.find({}).then((user_count) =>{console.log(`Users: ${user_count}`)})
 const comments = Comment.find({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
 
-/// GET Routes ///
+/// GET APIs ///
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -51,7 +51,7 @@ router.get('/success-login', (req, res) => {
     return res.render('success-login.pug')
 })
 
-/// POST ROUTES ///
+/// POST APIs ///
 // POST to create new blog post
 router.post('/api/posts', (req, res) => {
     const date = new Date()
@@ -105,7 +105,7 @@ router.post('/api/posts/:id/comments', (req, res) => {
     res.redirect('/api/posts/:id/comments')
 })
 
-/// UPDATE ROUTES ///
+/// UPDATE APIs ///
 
 // Post update
 router.put('/api/posts/:id', (req, res) => {
@@ -139,7 +139,7 @@ router.put('/api/posts/:id/comments/:commentId', (req, res) => {
     return res.send(`Comment number ${commentId} updated`)
 })
 
-/// DELETE ROUTES ///
+/// DELETE APIs ///
 
 router.delete('/api/posts/:id', (req, res) => {
     const { id } = req.params
