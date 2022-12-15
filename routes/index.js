@@ -10,11 +10,6 @@ const comments = Comment.find({}).then((comment_count) =>{console.log(`Comments:
 
 /// GET APIs ///
 
-/* GET home page */
-router.get('/', (req, res, next) => {
-    return res.redirect('/posts')
-})
-
 router.get('/api/posts', (req, res) => {
     const posts = Post.find({}).then((post_count) => {res.json(post_count)})
 })

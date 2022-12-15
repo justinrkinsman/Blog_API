@@ -9,5 +9,7 @@ router.get('/', (req, res, next) => {
 
 /* Load posts on home page */
 router.get('/posts', (req, res, next) => {
-    return res.render('index.pug')
+    return res.render('index.pug', {title: "Home Page"})
 })
+
+module.exports = router

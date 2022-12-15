@@ -16,6 +16,7 @@ const uuid = require('uuid')
 const cors = require('cors')
 
 const indexRouter = require('./routes/index')
+const catalog = require('./routes/catalog')
 
 const Post = require('./models/post')
 const Comment = require('./models/comment')
@@ -48,9 +49,11 @@ app.use(cors())
     }
     next()
 })*/
+
 app.use(bodyParser.json())
 
 app.use('/', indexRouter)
+app.use('/', catalog)
 
 app.post(
     '/login', 
