@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const async = require('async')
+const { DateTime } = require('luxon')
 const User = require('../models/user')
 const Comment = require('../models/comment')
 const Post = require('../models/post')
@@ -11,39 +12,40 @@ const comments = Comment.find({}).then((comment_count) =>{console.log(`Comments:
 /// GET APIs ///
 
 router.get('/api/posts', (req, res) => {
-    const posts = Post.find({}).then((post_count) => {res.json(post_count)})
+    Post.find({}).then((post_count) => {res.json(post_count)})
 })
 
 router.get('/api/posts/:id', (req, res) => {
     const { id } = req.params
-    const post = Post.find({_id: id}).then((found_post) => {res.json(found_post)})
+    Post.find({_id: id}).then((found_post) => {res.json(found_post)})
 })
 
 router.get('/api/posts/:id/comments', (req, res) => {
     const { id } = req.params;
-    const comments = Post.find({_id: id}).populate('comments').then((found_comments) => {res.json(found_comments)})
+    Post.find({_id: id}).populate('comments').then((found_comments) => {res.json(found_comments)})
 })
 
 /// POST APIs ///
 // POST to create new blog post
 router.post('/api/posts', (req, res) => {
     const date = new Date()
+    newTimestamp = DateTime.fromJSDate(date).toFormat("MMMM d yyyy h:mm a")
     postDetail = {
         title: req.body.title,
         body: req.body.body,
-        timestamp: date,
+        timestamp: newTimestamp,
         published: req.body.published
     }
     
     let post = new Post(postDetail)
 
     post.save(function (err) {
-        if (err) {
-            cb(err, null)
+        //if (err) {
+            //cb(err, null)
             return
-        }
+        //}
     })
-    return res.redirect('/posts')
+    return res.redirect('/api/posts')
 })
 
 // POST to add comment to post
