@@ -34,6 +34,7 @@ router.post('/api/posts', (req, res) => {
         title: req.body.title,
         body: req.body.body,
         timestamp: newTimestamp,
+        db_timestamp: date,
         published: req.body.published
     }
     
@@ -56,6 +57,7 @@ router.post('/api/posts/:id/comments', (req, res) => {
     commentDetail = {
         body: req.body.body,
         timestamp: newTimestamp,
+        db_timestamp: date,
         user: "63921eef7ddc8d4b5ead4617",
         post: req.params.id
     }
