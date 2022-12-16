@@ -51,6 +51,8 @@ router.post('/api/posts', (req, res) => {
 
 // POST to add comment to post
 router.post('/api/posts/:id/comments', (req, res) => {
+    const { id } = req.params
+    
     const date = new Date()
     newTimestamp = DateTime.fromJSDate(date).toFormat("MMMM d yyyy h:mm a")
 
@@ -71,7 +73,7 @@ router.post('/api/posts/:id/comments', (req, res) => {
         //}
     })
 
-    Post.findByIdAndUpdate(req.params.id, {_id: req.params.id, $push: {comments: comment}},
+    Post.findByIdAndUpdate(id, {_id: id, $push: {comments: comment}},
         function(err, docs) {
             if (err) {
                 console.log(err)
@@ -90,14 +92,14 @@ router.put('/api/posts/:id', (req, res) => {
     const { id } = req.params
 
     Post.findByIdAndUpdate(req.params.id, {_id: req.params.id, title: req.body.title, body: req.body.body},
-        function(err, docs) {
+        async function(err, docs) {
             if (err) {
                 console.log(err)
             }else{
                 console.log('Update Post :', docs)
             }
         })
-    
+
     return res.send(`Post number ${id} updated`)
 })
 
@@ -121,6 +123,14 @@ router.put('/api/posts/:id/comments/:commentId', (req, res) => {
 /// Delete post
 router.delete('/api/posts/:id', (req, res) => {
     const { id } = req.params
+
+    Comment.deleteMany({ post: id }, function(err, result) {
+        if (err) {
+            console.log(err)
+        }else{
+            console.log("Deleted comments: ", result)
+        }
+    })
 
     Post.findByIdAndDelete(id, (err, docs) => {
         if (err) {
