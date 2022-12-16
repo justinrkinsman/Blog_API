@@ -15,4 +15,9 @@ PostSchema.virtual("formatted_timestamp").get(function () {
     return DateTime.fromJSDate(this.timestamp).toFormat("MMMM d yyyy", " h:mm a")
 })
 
+PostSchema.pre("remove", (next) => {
+    // Delete all comments referenced by a post when the post is deleted
+    this.model("comments").remove({ post: this._id }, next)
+})
+
 module.exports = mongoose.model("Post", PostSchema)

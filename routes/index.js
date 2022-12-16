@@ -51,10 +51,11 @@ router.post('/api/posts', (req, res) => {
 // POST to add comment to post
 router.post('/api/posts/:id/comments', (req, res) => {
     const date = new Date()
-    
+    newTimestamp = DateTime.fromJSDate(date).toFormat("MMMM d yyyy h:mm a")
+
     commentDetail = {
         body: req.body.body,
-        timestamp: date,
+        timestamp: newTimestamp,
         user: "63921eef7ddc8d4b5ead4617",
         post: req.params.id
     }
