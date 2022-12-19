@@ -2,7 +2,6 @@ extends layout
 
 block content   
     h1 Create New Post 
-    h2 #{data}
     form(action='/new-post' method='POST' id='new-post-form')
         div.form-group 
             label(for='title') Post Title: 
