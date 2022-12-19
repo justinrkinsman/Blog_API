@@ -45,7 +45,7 @@ router.post('/api/posts', (req, res) => {
     post.save(function (err) {
         return
     })
-    res.redirect('/')
+    res.redirect('/api/posts')
 })
 
 // POST to add comment to post

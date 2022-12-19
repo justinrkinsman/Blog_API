@@ -59,19 +59,9 @@ router.post('/new-post', (req, res, next) => {
     })
     .then(response => response.json())
     .then(data => {
-
+        return res.render('index.pug', {posts: data})
     })
 })
-
-/*
-- let str = JSON.stringify(posts)
-  - let parsed = JSON.parse(str)
-  each post in parsed
-    div.post-layout
-      p #{post.title}
-      p #{post.body} 
-      p #{post.timestamp}
-*/
 
 /* GET login page */
 router.get('/login', (req, res) => {
