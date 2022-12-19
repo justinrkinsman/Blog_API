@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    a(href='/posts')
+        p Back to Home Page
+    a(href='/sign-up') Sign Up 
+    a(href='/login') Log In 
+    - let str = JSON.stringify(post)
+    - let parsed = JSON.parse(str)
+    each post in parsed
+        div.post-layout
+            h1 #{post.title}
+            p #{post.timestamp}
+            p #{post.body} 
+            p #{post.comments}

@@ -16,8 +16,17 @@ router.get('/posts', (req, res, next) => {
     .then(response => response.json())
     .then(data => {
         return res.render('index.pug', { title: "Home Page", posts: data })
+    }) 
+})
+
+/* Load specific post poage */
+router.get('/posts/:id', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render('specific-post.pug', { post: data })
     })
-    
 })
 
 /* GET login page */
