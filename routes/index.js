@@ -24,7 +24,7 @@ router.get('/api/posts/:id', (req, res) => {
 // GET comments list for specfic post
 router.get('/api/posts/:id/comments', (req, res) => {
     const { id } = req.params;
-    Post.find({_id: id}).populate('comments').then((found_comments) => {res.json(found_comments)})
+    Comment.find({post: id}).then((found_comments) => {res.json(found_comments)})
 })
 
 /// POST APIs ///

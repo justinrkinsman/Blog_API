@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    a(href='/posts')
+        p Back to Home Page
+    a(href='/sign-up') Sign Up 
+    a(href='/login') Log In 
+    - let str = JSON.stringify(comments)
+    - let parsed = JSON.parse(str)
+    each comment in parsed
+        div.comment-layout
+            p #{comment.body}
+            p #{comment.timestamp}

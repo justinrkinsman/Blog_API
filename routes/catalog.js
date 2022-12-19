@@ -29,6 +29,16 @@ router.get('/posts/:id', (req, res, next) => {
     })
 })
 
+/* Load comments for post */
+router.get('/posts/:id/comments', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render('comments.pug', {title: "Comments", comments: data})
+    })
+})
+
 /* GET login page */
 router.get('/login', (req, res) => {
     return res.render("login.pug", { title: "Log In" })

@@ -14,3 +14,11 @@ a {
   padding: 10px;
   margin-bottom: 5px;
 }
+
+.comment-layout {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin-bottom: 5px;
+}
