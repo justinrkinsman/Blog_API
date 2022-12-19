@@ -59,7 +59,7 @@ router.post('/new-post', (req, res, next) => {
     })
     .then(response => response.json())
     .then(data => {
-        return res.render('index.pug', {posts: data})
+        return res.redirect('/posts')
     })
 })
 
