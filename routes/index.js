@@ -10,16 +10,18 @@ const users = User.find({}).then((user_count) =>{console.log(`Users: ${user_coun
 const comments = Comment.find({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
 
 /// GET APIs ///
-
+// GET list of posts
 router.get('/api/posts', (req, res) => {
     Post.find({}).then((post_count) => {res.json(post_count)})
 })
 
+// GET specific post
 router.get('/api/posts/:id', (req, res) => {
     const { id } = req.params
     Post.find({_id: id}).then((found_post) => {res.json(found_post)})
 })
 
+// GET comments list for specfic post
 router.get('/api/posts/:id/comments', (req, res) => {
     const { id } = req.params;
     Post.find({_id: id}).populate('comments').then((found_comments) => {res.json(found_comments)})
@@ -60,7 +62,7 @@ router.post('/api/posts/:id/comments', (req, res) => {
         body: req.body.body,
         timestamp: newTimestamp,
         db_timestamp: date,
-        user: "63921eef7ddc8d4b5ead4617",
+        user: "63921eef7ddc8d4b5ead4617", ///This needs to be changed to req.user (ObjectId)
         post: req.params.id
     }
 
@@ -87,7 +89,7 @@ router.post('/api/posts/:id/comments', (req, res) => {
 
 /// UPDATE APIs ///
 
-// Post update
+// POST update post
 router.put('/api/posts/:id', (req, res) => {
     const { id } = req.params
 
@@ -120,7 +122,7 @@ router.put('/api/posts/:id/comments/:commentId', (req, res) => {
 })
 
 /// DELETE APIs ///
-/// Delete post
+/// DELETE post
 router.delete('/api/posts/:id', (req, res) => {
     const { id } = req.params
 
@@ -143,7 +145,7 @@ router.delete('/api/posts/:id', (req, res) => {
     return res.json({ deleted: id })
 })
 
-/// Delete comment
+/// DELETE comment
 router.delete('/api/posts/:id/comments/:commentId', (req, res) => {
     const commentId = req.params.commentId
     const id = req.params.id
