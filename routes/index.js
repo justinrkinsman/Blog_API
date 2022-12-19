@@ -43,12 +43,9 @@ router.post('/api/posts', (req, res) => {
     let post = new Post(postDetail)
 
     post.save(function (err) {
-        //if (err) {
-            //cb(err, null)
-            return
-        //}
+        return
     })
-    return res.redirect('/api/posts')
+    res.redirect('/')
 })
 
 // POST to add comment to post

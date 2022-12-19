@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const async = require('async')
+const async = require('async');
+const { body } = require('express-validator');
 const fetch = (...args) =>
     import('node-fetch').then(({default: fetch}) => fetch(...args))
 
@@ -47,29 +48,30 @@ router.get('/new-post', (req, res, next) => {
 /* Create new post */
 router.post('/new-post', (req, res, next) => {
     const requestUrl = `http://localhost:3000/api/posts`
-    fetch(requestUrl)
+    fetch(requestUrl, {
+        method: "POST",
+        // Try adding this later mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            "title": req.body.title, 
+            "body": req.body.body, 
+            "published": true })
+    })
+    .then(response => response.json())
+    .then(data => {
 
-/* Something like this
-fetch("http://example.com/api/endpoint/", {
-  method: "post",
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  },
-
-  //make sure to serialize your JSON body
-  body: JSON.stringify({
-    name: myName,
-    password: myPassword
-  })
+    })
 })
-.then( (response) => { 
-   //do something awesome that makes the world a better place
-});
+
+/*
+- let str = JSON.stringify(posts)
+  - let parsed = JSON.parse(str)
+  each post in parsed
+    div.post-layout
+      p #{post.title}
+      p #{post.body} 
+      p #{post.timestamp}
 */
-
-    return res.redirect('/')
-})
 
 /* GET login page */
 router.get('/login', (req, res) => {
