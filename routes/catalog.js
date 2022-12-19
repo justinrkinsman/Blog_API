@@ -39,6 +39,11 @@ router.get('/posts/:id/comments', (req, res, next) => {
     })
 })
 
+/* Load new post form */
+router.get('/new-post', (req, res, next) => {
+    res.render('new-post.pug', {title: "Create New Post"})
+})
+
 /* GET login page */
 router.get('/login', (req, res) => {
     return res.render("login.pug", { title: "Log In" })
