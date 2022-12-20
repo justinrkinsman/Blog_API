@@ -26,7 +26,7 @@ router.get('/posts/:id', (req, res, next) => {
     fetch(requestUrl)
     .then(response => response.json())
     .then(data => {
-        return res.render('specific-post.pug', { post: data })
+        return res.render('specific-post.pug', { post: data[0], comments: data[1] })
     })
 })
 

@@ -12,4 +12,10 @@ block content
             h1 #{post.title}
             p #{post.timestamp}
             p #{post.body} 
-            p #{post.comments}
+    - let commentStr = JSON.stringify(comments)
+    - let commentParsed = JSON.parse(commentStr)
+    each comment in commentParsed 
+        div.post-layout
+            p #{comment.body}
+            P #{comment.timestamp}
+            p #{comment.user}

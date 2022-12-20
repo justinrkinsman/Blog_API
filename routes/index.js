@@ -16,9 +16,12 @@ router.get('/api/posts', (req, res) => {
 })
 
 // GET specific post
-router.get('/api/posts/:id', (req, res) => {
+router.get('/api/posts/:id', async (req, res) => {
     const { id } = req.params
-    Post.find({_id: id}).then((found_post) => {res.json(found_post)})
+    const data = {}
+    await Post.find({_id: id}).then((found_post) => {data[0] = found_post})
+    await Comment.find({post: id}).then((found_comments) => {data[1] = found_comments})
+    res.json(data)
 })
 
 // GET comments list for specfic post
