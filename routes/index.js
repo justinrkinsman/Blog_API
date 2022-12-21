@@ -63,7 +63,7 @@ router.post('/api/posts/:id/comments', (req, res) => {
         timestamp: newTimestamp,
         db_timestamp: date,
         user: "63921eef7ddc8d4b5ead4617", ///This needs to be changed to req.user (ObjectId)
-        post: req.params.id
+        post: id
     }
 
     let comment = new Comment(commentDetail)
@@ -84,7 +84,7 @@ router.post('/api/posts/:id/comments', (req, res) => {
             }
         })
 
-    res.redirect('/api/posts/:id/comments')
+    res.redirect(`/api/posts/${id}/comments`)
 })
 
 /// UPDATE APIs ///

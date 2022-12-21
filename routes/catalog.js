@@ -70,7 +70,7 @@ router.post('/new-post', (req, res, next) => {
 
 /* Add comment to post */
 router.post('/posts/:id/new-comment', (req, res, next) => {
-    const requestUrl = `http://localhost:3000/api/posts/:id/comments`
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments`
     fetch(requestUrl, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -78,7 +78,7 @@ router.post('/posts/:id/new-comment', (req, res, next) => {
     })
     .then(response => response.json())
     .then(data => {
-        return res.redirect('/post/:id')
+        return res.redirect(`/posts/${req.params.id}/comments`)
     })
 })
 
