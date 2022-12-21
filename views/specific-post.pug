@@ -14,8 +14,4 @@ block content
             p #{post.body} 
     - let commentStr = JSON.stringify(comments)
     - let commentParsed = JSON.parse(commentStr)
-    each comment in commentParsed 
-        div.post-layout
-            p #{comment.body}
-            P #{comment.timestamp}
-            p #{comment.user}
+    p View all #{commentParsed.length} comments
