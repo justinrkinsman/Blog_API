@@ -45,6 +45,11 @@ router.get('/new-post', (req, res, next) => {
     res.render('new-post.pug', {title: "Create New Post"})
 })
 
+/* Load new comment page */
+router.get('/posts/:id/new-comment', (req, res, next) => {
+    res.render('new-comment.pug', {title:"Add Comment"})
+})
+
 /* Create new post */
 router.post('/new-post', (req, res, next) => {
     const requestUrl = `http://localhost:3000/api/posts`
@@ -60,6 +65,20 @@ router.post('/new-post', (req, res, next) => {
     .then(response => response.json())
     .then(data => {
         return res.redirect('/posts')
+    })
+})
+
+/* Add comment to post */
+router.post('/posts/:id/new-comment', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/:id/comments`
+    fetch(requestUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({"body": req.body.body})
+    })
+    .then(response => response.json())
+    .then(data => {
+        return res.redirect('/post/:id')
     })
 })
 
