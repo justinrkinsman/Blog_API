@@ -69,10 +69,10 @@ router.post('/api/posts/:id/comments', (req, res) => {
     let comment = new Comment(commentDetail)
 
     comment.save(function (err) {
-        //if (err) {
-            //cb(err, null)
+        if (err) {
+            console.log(err)
             return
-        //}
+        }
     })
 
     Post.findByIdAndUpdate(id, {_id: id, $push: {comments: comment}},

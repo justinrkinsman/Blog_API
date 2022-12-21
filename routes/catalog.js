@@ -74,7 +74,7 @@ router.post('/posts/:id/new-comment', (req, res, next) => {
     fetch(requestUrl, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"body": req.body.body})
+        body: JSON.stringify({"body": req.body.comment})
     })
     .then(response => response.json())
     .then(data => {
