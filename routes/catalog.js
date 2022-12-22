@@ -92,6 +92,21 @@ router.get('/posts/:id/edit-post', (req, res, next) => {
     })
 })
 
+/* Edit post */
+router.post('/posts/:id/edit-post', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}`
+    
+    fetch(requestUrl, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({"title": req.body.title, "body": req.body.body})
+    })
+    .then(response => response.json())
+    .then(data => {
+        return res.redirect('/posts')
+    })
+})
+
 /* GET login page */
 router.get('/login', (req, res) => {
     return res.render("login.pug", { title: "Log In" })

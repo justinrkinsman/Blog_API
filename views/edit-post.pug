@@ -2,21 +2,21 @@ extends layout
 
 block content   
     h1 Edit Post 
-    form(action='/new-post' method='POST' id='new-post-form')
     - let str = JSON.stringify(post)
     - let parsed = JSON.parse(str)
     each post in parsed
-        div.form-group 
-            label(for='title') Post Title:
-            input#title.form-control(type='text', value=post.title maxlength=100 name='title' )
-        div.form-group
-            label(for='post_body') Body: 
-            textarea#post_body.form-control(type='text', name='body')
-                | #{post.body}
-        button.btn.btn-primary(type='submit' ) Submit
-        a(href="/")
+        form(action='' method='POST' id='edit-post-form')
+            div.form-group 
+                label(for='title') Post Title:
+                input#title.form-control(type='text', value=post.title maxlength=100 name='title' )
+            div.form-group
+                label(for='post_body') Body: 
+                textarea#post_body.form-control(type='text', name='body')
+                    | #{post.body}
+            button.btn.btn-primary(type='submit' ) Submit
+            a(href="/")
                 p Cancel
-    if errors 
-        ul 
-            for error in errors 
-                li!= error.msg
+        if errors 
+            ul 
+                for error in errors 
+                    li!= error.msg

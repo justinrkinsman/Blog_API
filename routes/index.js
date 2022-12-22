@@ -107,7 +107,7 @@ router.put('/api/posts/:id', (req, res) => {
             }
         })
 
-    return res.send(`Post number ${id} updated`)
+    res.redirect(`/api/posts`)
 })
 
 // PUT update comment
