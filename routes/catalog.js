@@ -84,8 +84,12 @@ router.post('/posts/:id/new-comment', (req, res, next) => {
 
 /* GET edit post page */
 router.get('/posts/:id/edit-post', (req, res, next) => {
-    const { id } = req.params
-    res.render('edit-post.pug')
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/edit-post`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render(`edit-post.pug`, {title: "Edit Post", post: data})
+    })
 })
 
 /* GET login page */

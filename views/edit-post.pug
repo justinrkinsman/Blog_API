@@ -3,12 +3,16 @@ extends layout
 block content   
     h1 Edit Post 
     form(action='/new-post' method='POST' id='new-post-form')
+    - let str = JSON.stringify(post)
+    - let parsed = JSON.parse(str)
+    each post in parsed
         div.form-group 
-            label(for='title') Post Title: 
-            input#title.form-control(type='text', placeholder='My First Post' maxlength=100 name='title' )
+            label(for='title') Post Title:
+            input#title.form-control(type='text', value=post.title maxlength=100 name='title' )
         div.form-group
             label(for='post_body') Body: 
-            textarea#post_body.form-control(type='text', placeholder='Your message text here' name='body')
+            textarea#post_body.form-control(type='text', name='body')
+                | #{post.body}
         button.btn.btn-primary(type='submit' ) Submit
         a(href="/")
                 p Cancel
