@@ -82,6 +82,12 @@ router.post('/posts/:id/new-comment', (req, res, next) => {
     })
 })
 
+/* GET edit post page */
+router.get('/posts/:id/edit-post', (req, res, next) => {
+    const { id } = req.params
+    res.render('edit-post.pug')
+})
+
 /* GET login page */
 router.get('/login', (req, res) => {
     return res.render("login.pug", { title: "Log In" })

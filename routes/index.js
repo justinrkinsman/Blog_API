@@ -88,7 +88,6 @@ router.post('/api/posts/:id/comments', (req, res) => {
 })
 
 /// UPDATE APIs ///
-
 // PUT update post
 router.put('/api/posts/:id', (req, res) => {
     const { id } = req.params
