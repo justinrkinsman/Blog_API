@@ -103,13 +103,17 @@ router.post('/posts/:id/edit-post', (req, res, next) => {
     })
     .then(response => response.json())
     .then(data => {
-        return res.redirect('/posts')
+        console.log('Success', data)
     })
+    .catch((error) => {
+        console.log('Error', error)
+    })
+    res.redirect(`/posts/${req.params.id}`)
 })
 
 /* GET login page */
 router.get('/login', (req, res) => {
-    return res.render("login.pug", { title: "Log In" })
+    return res.redirect('/')
 })
 
 /* GET signup page */
