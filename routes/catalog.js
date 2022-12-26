@@ -111,6 +111,16 @@ router.post('/posts/:id/edit-post', (req, res, next) => {
     res.redirect(`/posts/${req.params.id}`)
 })
 
+/* GET edit commment page */
+router.get('/posts/:id/comments/:commentId/edit-comment', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render(`edit-comment.pug`, {title: "Edit Comment", comment: data})
+    })
+})
+
 /* GET login page */
 router.get('/login', (req, res) => {
     return res.redirect('/')
