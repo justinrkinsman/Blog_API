@@ -20,7 +20,7 @@ router.get('/posts', (req, res, next) => {
     }) 
 })
 
-/* Load specific post poage */
+/* Load specific post page */
 router.get('/posts/:id', (req, res, next) => {
     const requestUrl = `http://localhost:3000/api/posts/${req.params.id}`
     fetch(requestUrl)
@@ -79,6 +79,16 @@ router.post('/posts/:id/new-comment', (req, res, next) => {
     .then(response => response.json())
     .then(data => {
         return res.redirect(`/posts/${req.params.id}/comments`)
+    })
+})
+
+/* Load specific post page */
+router.get('/posts/:id/comments/:commentId', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/${req.params.commentId}`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render('specific-comment.pug', { comment: data })
     })
 })
 
