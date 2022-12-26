@@ -88,7 +88,7 @@ router.get('/posts/:id/comments/:commentId', (req, res, next) => {
     fetch(requestUrl)
     .then(response => response.json())
     .then(data => {
-        return res.render('specific-comment.pug', { comment: data })
+        return res.render('specific-comment.pug', { title: "Comment Info", comment: data })
     })
 })
 
