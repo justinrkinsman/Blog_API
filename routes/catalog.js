@@ -82,7 +82,7 @@ router.post('/posts/:id/new-comment', (req, res, next) => {
     })
 })
 
-/* Load specific post page */
+/* Load specific comment */
 router.get('/posts/:id/comments/:commentId', (req, res, next) => {
     const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/${req.params.commentId}`
     fetch(requestUrl)
@@ -123,7 +123,7 @@ router.post('/posts/:id/edit-post', (req, res, next) => {
 
 /* GET edit commment page */
 router.get('/posts/:id/comments/:commentId/edit-comment', (req, res, next) => {
-    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/`
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/${req.params.commentId}`
     fetch(requestUrl)
     .then(response => response.json())
     .then(data => {
