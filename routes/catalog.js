@@ -150,6 +150,16 @@ router.get('/posts/:id/comments/:commentId/edit-comment', (req, res, next) => {
     })
 })
 
+/* GET delete post page */
+router.get('/posts/:id/delete-post', (req, res) => {
+    res.render('delete-post.pug')
+})
+
+/* GET delete comment page */
+router.get('/posts/:id/comments/:commentId/delete-comment', (req, res) => {
+    res.render('delete-comment.pug')
+})
+
 /* GET login page */
 router.get('/login', (req, res) => {
     return res.redirect('/')
