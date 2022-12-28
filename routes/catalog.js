@@ -152,12 +152,12 @@ router.get('/posts/:id/comments/:commentId/edit-comment', (req, res, next) => {
 
 /* GET delete post page */
 router.get('/posts/:id/delete-post', (req, res) => {
-    res.render('delete-post.pug')
+    res.render('delete-post.pug', {title: "Delete Post"})
 })
 
 /* GET delete comment page */
 router.get('/posts/:id/comments/:commentId/delete-comment', (req, res) => {
-    res.render('delete-comment.pug')
+    res.render('delete-comment.pug', {title: "Delete Comment"})
 })
 
 /* GET login page */
