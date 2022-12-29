@@ -141,7 +141,21 @@ router.post('/posts/:id/comments/:commentId/edit-comment', (req, res) => {
 })
 
 /* DELETE post */
-//router.post('/posts/:id/delete-post')
+router.post('/posts/:id/delete-post', (req, res) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}`
+    fetch(requestUrl, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success', data)
+    })
+    .catch((error) => {
+        console.log('Error', error)
+    })
+    res.redirect('/posts')
+})
 
 /* GET edit commment page */
 router.get('/posts/:id/comments/:commentId/edit-comment', (req, res, next) => {
