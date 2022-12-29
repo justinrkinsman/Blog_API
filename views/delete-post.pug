@@ -2,5 +2,8 @@ extends layout
 
 block content   
     h1 Are you sure you want to delete this post?
-    a(href='/') Yes 
-    a(href='/') No
+    form(action='' method='POST' id='delete-post-form')
+        div.form-group 
+            button.btn.btn-primary(type='submit') Yes 
+            a(href='/')
+                p Cancel

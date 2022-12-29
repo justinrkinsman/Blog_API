@@ -140,6 +140,9 @@ router.post('/posts/:id/comments/:commentId/edit-comment', (req, res) => {
     res.redirect(`/posts/${req.params.id}/comments/${req.params.commentId}`)
 })
 
+/* DELETE post */
+//router.post('/posts/:id/delete-post')
+
 /* GET edit commment page */
 router.get('/posts/:id/comments/:commentId/edit-comment', (req, res, next) => {
     const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/${req.params.commentId}`
