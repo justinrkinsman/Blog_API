@@ -8,7 +8,8 @@ block content
   - let str = JSON.stringify(posts)
   - let parsed = JSON.parse(str)
   each post in parsed
-    div.post-layout
-      p #{post.title}
-      p #{post.body} 
-      p #{post.timestamp}
+    a(href=`/posts/${post._id}` class='link-to-post')
+      div.post-layout
+        p #{post.title}
+        p #{post.body} 
+        p #{post.timestamp}

@@ -196,7 +196,7 @@ router.get('/posts/:id/comments/:commentId/delete-comment', (req, res) => {
 
 /* GET login page */
 router.get('/login', (req, res) => {
-    return res.redirect('/')
+    res.render('login.pug', { title: "Login" })
 })
 
 /* GET signup page */
