@@ -7,6 +7,8 @@ block content
     a(href='/login') Log In 
     - let str = JSON.stringify(comment)
     - let parsed = JSON.parse(str)
+    a(href=`/posts/${parsed[0].post}/comments`)
+        p Back to Comments
     each comment in parsed
         div.comment-layout
             p #{comment.body} 
