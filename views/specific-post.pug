@@ -12,6 +12,7 @@ block content
             h1 #{post.title}
             p #{post.timestamp}
             p #{post.body} 
-    - let commentStr = JSON.stringify(comments)
-    - let commentParsed = JSON.parse(commentStr)
-    p View all #{commentParsed.length} comments
+        a(href=`/posts/${post._id}/comments`)
+            - let commentStr = JSON.stringify(comments)
+            - let commentParsed = JSON.parse(commentStr)
+                p View all #{commentParsed.length} comments
