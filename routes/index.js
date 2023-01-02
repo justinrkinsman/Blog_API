@@ -12,7 +12,7 @@ const comments = Comment.find({}).then((comment_count) =>{console.log(`Comments:
 /// GET APIs ///
 // GET list of posts
 router.get('/api/posts', (req, res) => {
-    Post.find({}).then((post_count) => {res.json(post_count)})
+    Post.find({}).sort({db_timestamp: -1}).then((post_count) => {res.json(post_count)})
 })
 
 // GET specific post
