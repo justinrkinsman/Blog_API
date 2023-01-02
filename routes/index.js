@@ -6,9 +6,6 @@ const User = require('../models/user')
 const Comment = require('../models/comment')
 const Post = require('../models/post')
 
-const users = User.find({}).then((user_count) =>{console.log(`Users: ${user_count}`)})
-const comments = Comment.find({}).then((comment_count) =>{console.log(`Comments: ${comment_count}`)})
-
 /// GET APIs ///
 // GET list of posts
 router.get('/api/posts', (req, res) => {
@@ -32,7 +29,11 @@ router.get('/api/posts/:id/comments/:commentId', (req, res) => {
 // GET comments list for specfic post
 router.get('/api/posts/:id/comments', (req, res) => {
     const { id } = req.params;
-    Comment.find({post: id}).sort({db_timestamp: -1}).then((found_comments) => {res.json(found_comments)})
+    const data = {}
+    Comment.find({post: id})
+    .sort({db_timestamp: -1})
+    .populate('user')
+    .then((found_comments) => {res.json(found_comments)})
 })
 
 // GET post edit page

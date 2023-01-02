@@ -4,6 +4,7 @@ const async = require('async');
 const { body } = require('express-validator');
 const fetch = (...args) =>
     import('node-fetch').then(({default: fetch}) => fetch(...args))
+const User = require('../models/user')
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -33,9 +34,10 @@ router.get('/posts/:id', (req, res, next) => {
 /* Load comments for post */
 router.get('/posts/:id/comments', (req, res, next) => {
     const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments`
+    const user = {}
     fetch(requestUrl)
     .then(response => response.json())
-    .then(data => {
+    .then(async data => {
         return res.render('comments.pug', {title: "Comments", comments: data})
     })
 })
