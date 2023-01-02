@@ -193,7 +193,12 @@ router.get('/posts/:id/delete-post', (req, res) => {
 
 /* GET delete comment page */
 router.get('/posts/:id/comments/:commentId/delete-comment', (req, res) => {
-    res.render('delete-comment.pug', {title: "Delete Comment"})
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/${req.params.commentId}`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render('delete-comment.pug', {title: "Delete Comment", comment: data})
+    })
 })
 
 /* GET login page */
