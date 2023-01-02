@@ -188,8 +188,24 @@ router.get('/posts/:id/comments/:commentId/edit-comment', (req, res, next) => {
 
 /* GET delete post page */
 router.get('/posts/:id/delete-post', (req, res) => {
-    res.render('delete-post.pug', {title: "Delete Post"})
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/delete-post`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render('delete-post.pug', {title: "Delete Post", post: data})
+    })
 })
+
+/*
+router.get('/posts/:id/edit-post', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/edit-post`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render(`edit-post.pug`, {title: "Edit Post", post: data})
+    })
+})
+*/
 
 /* GET delete comment page */
 router.get('/posts/:id/comments/:commentId/delete-comment', (req, res) => {

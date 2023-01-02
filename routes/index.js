@@ -42,6 +42,12 @@ router.get('/api/posts/:id/edit-post', (req, res) => {
     Post.find({_id: id}).then((found_post) => res.json(found_post))
 })
 
+// GET post delete page
+router.get('/api/posts/:id/delete-post', (req, res) => {
+    const { id } = req.params
+    Post.find({_id: id}).then((found_post) => res.json(found_post))
+})
+
 /// POST APIs ///
 // POST to create new blog post
 router.post('/api/posts', (req, res) => {
