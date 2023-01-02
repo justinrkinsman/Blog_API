@@ -32,7 +32,7 @@ router.get('/api/posts/:id/comments/:commentId', (req, res) => {
 // GET comments list for specfic post
 router.get('/api/posts/:id/comments', (req, res) => {
     const { id } = req.params;
-    Comment.find({post: id}).then((found_comments) => {res.json(found_comments)})
+    Comment.find({post: id}).sort({db_timestamp: -1}).then((found_comments) => {res.json(found_comments)})
 })
 
 // GET post edit page
