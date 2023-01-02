@@ -23,7 +23,7 @@ router.get('/api/posts/:id', async (req, res) => {
 
 // GET specific comment
 router.get('/api/posts/:id/comments/:commentId', (req, res) => {
-    Comment.find({_id: req.params.commentId}).then((found_comments) => {res.json(found_comments)})
+    Comment.find({_id: req.params.commentId}).populate('user').then((found_comments) => {res.json(found_comments)})
 })
 
 // GET comments list for specfic post
