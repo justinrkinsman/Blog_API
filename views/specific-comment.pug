@@ -15,3 +15,4 @@ block content
             p #{comment.timestamp} 
             p #{comment.user.username}
     a(href=`/posts/${parsed[0].post}/comments/${parsed[0]._id}/edit-comment`) Edit Comment
+    a(href=`/posts/${parsed[0].post}/comments/${parsed[0]._id}/delete-comment`) Delete Comment
