@@ -10,6 +10,5 @@ block content
   each post in parsed
     a(href=`/posts/${post._id}` class='link-to-post')
       div.post-layout
-        p #{post.title}
-        p #{post.body} 
+        h2 #{post.title}
         p #{post.timestamp}
