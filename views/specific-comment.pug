@@ -14,3 +14,4 @@ block content
             p #{comment.body} 
             p #{comment.timestamp} 
             p #{comment.user.username}
+    a(href=`/posts/${parsed[0].post}/comments/${parsed[0]._id}/edit-comment`) Edit Comment
