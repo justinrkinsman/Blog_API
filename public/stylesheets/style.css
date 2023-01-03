@@ -28,7 +28,7 @@ a {
   color: black;
 }
 
-.post-layout:hover {
+a > .post-layout:hover, a > .comment-layout:hover {
   transform: scale(1.05)
 }
 
