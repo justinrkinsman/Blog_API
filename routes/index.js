@@ -4,7 +4,8 @@ const async = require('async')
 const { DateTime } = require('luxon')
 const User = require('../models/user')
 const Comment = require('../models/comment')
-const Post = require('../models/post')
+const Post = require('../models/post');
+const user = require('../models/user');
 
 /// GET APIs ///
 // GET list of posts
@@ -70,22 +71,18 @@ router.post('/api/posts', (req, res) => {
 })
 
 // POST to add comment to post
-router.post('/api/posts/:id/comments', (req, res) => {
+router.post('/api/posts/:id/comments', async (req, res) => {
     const { id } = req.params
-    
     const date = new Date()
-    newTimestamp = DateTime.fromJSDate(date).toFormat("MMMM d yyyy h:mm a")
+    newTimestamp = DateTime.fromJSDate(date).toFormat("MMMM d yyyy h:mm a")    
+    
+    const userId = await User.findOne({username: req.body.user})
 
-    
-    const userId = {}
-    
-    //User.find({username: req.user.username}).then(found_user => (userId[0] = found_user))
-    
     commentDetail = {
         body: req.body.body,
         timestamp: newTimestamp,
         db_timestamp: date,
-        user: "63921eef7ddc8d4b5ead4617", ///This needs to be changed to req.user (ObjectId)
+        user: userId, ///This needs to be changed to req.user (ObjectId)
         post: id
     }
 
