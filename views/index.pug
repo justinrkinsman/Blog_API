@@ -5,6 +5,7 @@ block content
   a(href='/login') Log In
   h1= "Posts"
   p Welcome to #{title}
+  p Hello #{user}
   - let str = JSON.stringify(posts)
   - let parsed = JSON.parse(str)
   each post in parsed

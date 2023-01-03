@@ -76,11 +76,17 @@ router.post('/api/posts/:id/comments', (req, res) => {
     const date = new Date()
     newTimestamp = DateTime.fromJSDate(date).toFormat("MMMM d yyyy h:mm a")
 
+    /*
+    const userId = {}
+    
+    User.find({username: req.body.username}).then(found_user => (userId[0] = found_user))
+    */
+
     commentDetail = {
         body: req.body.body,
         timestamp: newTimestamp,
         db_timestamp: date,
-        user: req.user, ///This needs to be changed to req.user (ObjectId)
+        user: "63921eef7ddc8d4b5ead4617", ///This needs to be changed to req.user (ObjectId)
         post: id
     }
 

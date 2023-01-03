@@ -39,8 +39,55 @@ app.set('view engine', 'ejs')
 app.set('view engine', 'pug');
 
 app.use(express.static(__dirname + '/public'))
+
+passport.use(
+    new LocalStrategy((username, password, done) => {
+      User.findOne({ username: username.toLowerCase()}, (err, user) => {
+        if (err) {
+          return done(err)
+        }
+        if (!user) {
+          return done(null, false, { message: "Incorrect username" })
+        }
+        bcrypt.compare(password, user.password, (err, res) => {
+          if (res) {
+            // passwords match! log user in
+            return done(null, user)
+          } else {
+            // passwords do not match!
+            return done(null, false, { message: "Incorrect password" })
+          }
+          return done (null, user)
+        })
+      })
+    })
+  )
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id)
+})
+  
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user)
+    })
+})
+
+app.use(session({ 
+    secret: "superSecretPassword",
+    secure: false,
+    httpOnly: true,
+    sameSite: true,
+    maxAge: 24 * 60 * 60 * 1000,
+    resave: false, 
+    saveUninitialized: true, }))
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(logger('dev'));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 /*app.use((req, res, next) => {
     req.context = {

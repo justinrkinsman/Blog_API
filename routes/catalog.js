@@ -17,7 +17,11 @@ router.get('/posts', (req, res, next) => {
     fetch(requestUrl)
     .then(response => response.json())
     .then(data => {
-        return res.render('index.pug', { title: "Home Page", posts: data })
+        if (!req.user) {
+            return res.render('index.pug', { title: "Home Page", posts: data, user: null })
+        }else{
+            return res.render('index.pug', { title: "Home Page", posts: data, user: req.user.username})
+        }
     }) 
 })
 
