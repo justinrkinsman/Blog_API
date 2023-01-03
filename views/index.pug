@@ -1,15 +1,27 @@
 extends layout
 
 block content
-  a(href='/sign-up') Sign Up 
-  a(href='/login') Log In
-  h1= "Posts"
-  p Welcome to #{title}
-  p Hello #{user}
-  - let str = JSON.stringify(posts)
-  - let parsed = JSON.parse(str)
-  each post in parsed
-    a(href=`/posts/${post._id}` class='link-to-post')
-      div.post-layout
-        h2 #{post.title}
-        p #{post.timestamp}
+  if (!user) 
+    a(href='/sign-up') Sign Up 
+    a(href='/login') Log In
+    h1= "Posts"
+    p Welcome to #{title}
+    - let str = JSON.stringify(posts)
+    - let parsed = JSON.parse(str)
+    each post in parsed
+      a(href=`/posts/${post._id}` class='link-to-post')
+        div.post-layout
+          h2 #{post.title}
+          p #{post.timestamp}
+  else 
+    a(href='/logout') Logout
+    h1= "Posts"
+    p Welcome to #{title}
+    p Hello #{user}
+    - let str = JSON.stringify(posts)
+    - let parsed = JSON.parse(str)
+    each post in parsed
+      a(href=`/posts/${post._id}` class='link-to-post')
+        div.post-layout
+          h2 #{post.title}
+          p #{post.timestamp}

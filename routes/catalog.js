@@ -240,7 +240,7 @@ router.get('/failed-login', (req, res) => {
 /* GET successful login page */
 /// REMOVE THIS LATER ///
 router.get('/success-login', (req, res) => {
-    return res.render('success-login.pug')
+    return res.redirect('/')
 })
 
 module.exports = router
