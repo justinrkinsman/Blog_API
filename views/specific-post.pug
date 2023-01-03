@@ -12,9 +12,13 @@ block content
             h1 #{post.title}
             p #{post.timestamp}
             p #{post.body} 
-        a(href=`/posts/${post._id}/comments`)
-            - let commentStr = JSON.stringify(comments)
-            - let commentParsed = JSON.parse(commentStr)
+        - let commentStr = JSON.stringify(comments)
+        - let commentParsed = JSON.parse(commentStr)
+        if commentParsed.length > 0
+            a(href=`/posts/${post._id}/comments`)
                 p View all #{commentParsed.length} comments
+        else 
+            a(href=`/posts/${post.id}/new-comment`)
+                p No comments. Be the first?
         a(href=`/posts/${post._id}/edit-post`) Edit Post
         a(href=`/posts/${post._id}/delete-post`) Delete Post
