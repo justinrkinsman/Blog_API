@@ -63,6 +63,67 @@ app.post(
     })
 )
 
+/* POST sign up page to create new user */
+app.post('/sign-up', [
+    // Validate and sanitize fields
+    body('username')
+      .trim()
+      .isLength({ min: 1, max: 100 })
+      .toLowerCase()
+      .escape()
+      .withMessage('Username required'),
+    body('password')
+      .trim()
+      .isLength({ min: 8, max: 100 })
+      .escape()
+      .withMessage("Password is required"),
+    check('confirm_password')
+      .exists()
+      .custom((value, {req}) => value === req.body.password)
+      .withMessage('Passwords must match'),
+    // Process request after validation and sanitization
+    (req, res, next) => {
+      const errors = validationResult(req)
+  
+      // Create a User object with escaped and trimmed data
+      const user = new User({
+        username: req.body.username.toLowerCase(),
+        password: req.body.password,
+      })
+  
+      if (!errors.isEmpty()) {
+        res.render('sign-up.pug', {
+          title: "Sign Up",
+          user: req.user,
+          errors: errors.array(),
+        })
+        return
+      } else {
+        // Data from form is valid. Check if user with same username exists.
+        User.findOne({ username: req.body.username.toLowerCase() }).exec((err, found_username) => {
+          if (err) {
+            return next(err)
+          }
+          if (found_username) {
+            res.render('sign-up.pug', {info: "Username already in use"})
+          } else {
+            bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
+              const user = new User({
+                username: req.body.username.toLowerCase(),
+                password: hashedPassword
+              }).save(err => {
+                if (err) {
+                  return next(err)
+                }
+                res.redirect('/')
+              })
+            })
+          }
+        })
+      }
+    }
+  ])
+
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404))

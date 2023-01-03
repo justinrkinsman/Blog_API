@@ -80,7 +80,7 @@ router.post('/api/posts/:id/comments', (req, res) => {
         body: req.body.body,
         timestamp: newTimestamp,
         db_timestamp: date,
-        user: "63921eef7ddc8d4b5ead4617", ///This needs to be changed to req.user (ObjectId)
+        user: req.user, ///This needs to be changed to req.user (ObjectId)
         post: id
     }
 
