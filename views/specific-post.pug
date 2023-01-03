@@ -18,9 +18,11 @@ block content
             if commentParsed.length > 0
                 a(href=`/posts/${post._id}/comments`)
                     p View all #{commentParsed.length} comments
+                a(href='/login')
+                    p Login to leave a comment
             else 
-                a(href=`/posts/${post._id}/new-comment`)
-                    p No comments. Be the first?
+                a(href='/login')
+                    p No comments. Login to be the first to comment
             a(href=`/posts/${post._id}/edit-post`) Edit Post
             a(href=`/posts/${post._id}/delete-post`) Delete Post
     else
