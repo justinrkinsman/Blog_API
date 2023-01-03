@@ -28,6 +28,10 @@ a {
   color: black;
 }
 
+.post-layout:hover {
+  transform: scale(1.05)
+}
+
 .link-to-comment {
   text-decoration: none;
   color: black;
