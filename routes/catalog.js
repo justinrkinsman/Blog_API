@@ -60,7 +60,7 @@ router.get('/new-post', (req, res, next) => {
 
 /* Load new comment page */
 router.get('/posts/:id/new-comment', (req, res, next) => {
-    res.render('new-comment.pug', {title:"Add Comment"})
+    res.render('new-comment.pug', {title:"Add Comment", user: req.user.username})
 })
 
 /* Create new post */
