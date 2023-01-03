@@ -5,6 +5,7 @@ const { body } = require('express-validator');
 const fetch = (...args) =>
     import('node-fetch').then(({default: fetch}) => fetch(...args))
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -28,10 +29,16 @@ router.get('/posts', (req, res, next) => {
 /* Load specific post page */
 router.get('/posts/:id', (req, res, next) => {
     const requestUrl = `http://localhost:3000/api/posts/${req.params.id}`
-    fetch(requestUrl)
+    fetch(requestUrl, {
+        credentials: "include"
+    })
     .then(response => response.json())
     .then(data => {
-        return res.render('specific-post.pug', { post: data[0], comments: data[1] })
+        if (!req.user) {
+            return res.render('specific-post.pug', { post: data[0], comments: data[1], user: null })
+        } else {
+            return res.render('specific-post.pug', { post: data[0], comments: data[1], user: req.user.username })
+        }
     })
 })
 
@@ -80,7 +87,7 @@ router.post('/posts/:id/new-comment', (req, res, next) => {
     fetch(requestUrl, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"body": req.body.comment})
+        body: JSON.stringify({"body": req.body.comment, "user": req.user.username})
     })
     .then(response => response.json())
     .then(data => {

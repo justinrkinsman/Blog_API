@@ -1,24 +1,47 @@
 extends layout
 
 block content
-    a(href='/posts')
-        p Back to Home Page
-    a(href='/sign-up') Sign Up 
-    a(href='/login') Log In 
-    - let str = JSON.stringify(post)
-    - let parsed = JSON.parse(str)
-    each post in parsed
-        div.post-layout
-            h1 #{post.title}
-            p #{post.timestamp}
-            p #{post.body} 
-        - let commentStr = JSON.stringify(comments)
-        - let commentParsed = JSON.parse(commentStr)
-        if commentParsed.length > 0
-            a(href=`/posts/${post._id}/comments`)
-                p View all #{commentParsed.length} comments
-        else 
-            a(href=`/posts/${post._id}/new-comment`)
-                p No comments. Be the first?
-        a(href=`/posts/${post._id}/edit-post`) Edit Post
-        a(href=`/posts/${post._id}/delete-post`) Delete Post
+    if (!user)
+        a(href='/posts')
+            p Back to Home Page
+        a(href='/sign-up') Sign Up 
+        a(href='/login') Log In 
+        - let str = JSON.stringify(post)
+        - let parsed = JSON.parse(str)
+        each post in parsed
+            div.post-layout
+                h1 #{post.title}
+                p #{post.timestamp}
+                p #{post.body} 
+            - let commentStr = JSON.stringify(comments)
+            - let commentParsed = JSON.parse(commentStr)
+            if commentParsed.length > 0
+                a(href=`/posts/${post._id}/comments`)
+                    p View all #{commentParsed.length} comments
+            else 
+                a(href=`/posts/${post._id}/new-comment`)
+                    p No comments. Be the first?
+            a(href=`/posts/${post._id}/edit-post`) Edit Post
+            a(href=`/posts/${post._id}/delete-post`) Delete Post
+    else
+        a(href='/posts')
+            p Back to Home Page
+        a(href='/logout') Logout
+        p Hello #{user}
+        - let str = JSON.stringify(post)
+        - let parsed = JSON.parse(str)
+        each post in parsed
+            div.post-layout
+                h1 #{post.title}
+                p #{post.timestamp}
+                p #{post.body} 
+            - let commentStr = JSON.stringify(comments)
+            - let commentParsed = JSON.parse(commentStr)
+            if commentParsed.length > 0
+                a(href=`/posts/${post._id}/comments`)
+                    p View all #{commentParsed.length} comments
+            else 
+                a(href=`/posts/${post._id}/new-comment`)
+                    p No comments. Be the first?
+            a(href=`/posts/${post._id}/edit-post`) Edit Post
+            a(href=`/posts/${post._id}/delete-post`) Delete Post

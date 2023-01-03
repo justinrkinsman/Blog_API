@@ -76,12 +76,11 @@ router.post('/api/posts/:id/comments', (req, res) => {
     const date = new Date()
     newTimestamp = DateTime.fromJSDate(date).toFormat("MMMM d yyyy h:mm a")
 
-    /*
+    
     const userId = {}
     
-    User.find({username: req.body.username}).then(found_user => (userId[0] = found_user))
-    */
-
+    //User.find({username: req.user.username}).then(found_user => (userId[0] = found_user))
+    
     commentDetail = {
         body: req.body.body,
         timestamp: newTimestamp,

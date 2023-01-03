@@ -14,6 +14,7 @@ const { body, validationResult, check } = require('express-validator')
 const async = require("async")
 const uuid = require('uuid')
 const cors = require('cors')
+const jwt = require('jsonwebtoken')
 
 const indexRouter = require('./routes/index')
 const catalog = require('./routes/catalog')
