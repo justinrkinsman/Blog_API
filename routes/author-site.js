@@ -13,7 +13,7 @@ router.get('/login', (req, res, next) => {
 })
 
 router.get('/success-login', (req, res) => {
-    return res.render('admin-success.pug')
+    return res.render('admin-success.pug', {title: 'Admin Page'})
 })
 
 router.get('/failed-login', (req, res) => {
