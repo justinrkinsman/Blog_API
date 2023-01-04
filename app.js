@@ -18,6 +18,7 @@ const jwt = require('jsonwebtoken')
 
 const indexRouter = require('./routes/index')
 const catalog = require('./routes/catalog')
+const authorSite = require('./routes/author-site')
 
 const Post = require('./models/post')
 const Comment = require('./models/comment')
@@ -103,6 +104,7 @@ app.use(bodyParser.json())
 
 app.use('/', indexRouter)
 app.use('/', catalog)
+app.use('/admin', authorSite)
 
 app.post(
   '/login', 
