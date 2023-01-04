@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const async = require('async')
 const { DateTime } = require('luxon')
+const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const Comment = require('../models/comment')
 const Post = require('../models/post');
@@ -50,6 +51,11 @@ router.get('/api/posts/:id/delete-post', (req, res) => {
 })
 
 /// POST APIs ///
+//POST login
+router.post('/api/login', (req, res) => {
+    
+})
+
 // POST to create new blog post
 router.post('/api/posts', (req, res) => {
     const date = new Date()
@@ -82,7 +88,7 @@ router.post('/api/posts/:id/comments', async (req, res) => {
         body: req.body.body,
         timestamp: newTimestamp,
         db_timestamp: date,
-        user: userId, ///This needs to be changed to req.user (ObjectId)
+        user: userId,
         post: id
     }
 

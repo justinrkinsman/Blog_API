@@ -98,17 +98,18 @@ app.use(cors())
     next()
 })*/
 
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use('/', indexRouter)
 app.use('/', catalog)
 
 app.post(
-    '/login', 
-    passport.authenticate("local", {
-        successRedirect: '/success-login',
-        failureRedirect: '/failed-login'
-    })
+  '/login', 
+  passport.authenticate("local", {
+    successRedirect: '/success-login',
+    failureRedirect: '/failed-login'
+  })
 )
 
 app.get("/logout", (req, res, next) => {
