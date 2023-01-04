@@ -122,6 +122,14 @@ app.post(
   })
 )
 
+app.post(
+  '/admin/failed-login',
+  passport.authenticate("local", {
+    successRedirect: '/admin/success-login',
+    failureRedirect: '/admin/failed-login'
+  })
+)
+
 app.get("/logout", (req, res, next) => {
   req.logout()
   res.status(200).clearCookie('connect.sid', {
