@@ -139,12 +139,22 @@ app.post(
 )
 
 app.get("/logout", (req, res, next) => {
-  req.logout()
-  res.status(200).clearCookie('connect.sid', {
-    path: '/'
-  })
-  req.session = null
-  res.redirect('/')
+  if (req.user.admin !== true) {
+    req.logout()
+    res.status(200).clearCookie('connect.sid', {
+      path: '/'
+    })
+    req.session = null
+    res.redirect('/')
+  }
+  if (req.user.admin === true) {
+    req.logout()
+    res.status(200).clearCookie('connect.sid', {
+      path: '/'
+    })
+    req.session = null
+    res.redirect('/admin/login')
+  }
 })
 
 /* POST sign up page to create new user */

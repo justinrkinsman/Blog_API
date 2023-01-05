@@ -17,6 +17,7 @@ router.get('/login', (req, res, next) => {
     return res.render('admin-login.pug')
 })
 
+///Add post, user, and comment count to this page
 router.get('/dashboard', async (req, res) => {
     if (req.user.admin !== true) {
         return res.redirect('/admin/failed-login')

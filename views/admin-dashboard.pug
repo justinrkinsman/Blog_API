@@ -3,7 +3,7 @@ extends layout
 block content   
 
     h1 Welcome Admin
-    p Logout (does nothing)
+    a(href='/logout') Logout
     h1= "Posts"
     - let str = JSON.stringify(posts)
     - let parsed = JSON.parse(str)
