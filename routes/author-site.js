@@ -61,4 +61,16 @@ router.post('/new-post', (req, res, next) => {
     })
 })
 
+/* Load specific post page */
+router.get('/post/:id', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}`
+    fetch(requestUrl, {
+        credentials: "include"
+    })
+    .then(response => response.json())
+    .then(data => {
+        return res.render('admin-specific-post.pug', {post: data[0], comments: data[1]})
+    })
+})
+
 module.exports = router

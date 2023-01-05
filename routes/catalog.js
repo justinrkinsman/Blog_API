@@ -36,7 +36,9 @@ router.get('/posts/:id', (req, res, next) => {
     .then(data => {
         if (!req.user) {
             return res.render('specific-post.pug', { post: data[0], comments: data[1], user: null })
-        } else {
+        } else if (req.user.admin === true){
+            return res.render('admin-specific-post.pug')
+        }else{
             return res.render('specific-post.pug', { post: data[0], comments: data[1], user: req.user.username })
         }
     })
@@ -53,32 +55,9 @@ router.get('/posts/:id/comments', (req, res, next) => {
     })
 })
 
-/* Load new post form */
-router.get('/new-post', (req, res, next) => {
-    res.render('new-post.pug', {title: "Create New Post"})
-})
-
 /* Load new comment page */
 router.get('/posts/:id/new-comment', (req, res, next) => {
     res.render('new-comment.pug', {title:"Add Comment", user: req.user.username})
-})
-
-/* Create new post */
-router.post('/new-post', (req, res, next) => {
-    const requestUrl = `http://localhost:3000/api/posts`
-    fetch(requestUrl, {
-        method: "POST",
-        // Try adding this later mode: 'cors',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            "title": req.body.title, 
-            "body": req.body.body, 
-            "published": true })
-    })
-    .then(response => response.json())
-    .then(data => {
-        return res.redirect('/posts')
-    })
 })
 
 /* Add comment to post */
