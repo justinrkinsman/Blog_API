@@ -4,8 +4,6 @@ block content
 
     a(href='/admin/dashboard')
         p Back to Admin Dashboard
-        a(href='/logout') Logout
-        p Hello #{user}
         - let str = JSON.stringify(post)
         - let parsed = JSON.parse(str)
         each post in parsed

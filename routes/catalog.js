@@ -36,9 +36,7 @@ router.get('/posts/:id', (req, res, next) => {
     .then(data => {
         if (!req.user) {
             return res.render('specific-post.pug', { post: data[0], comments: data[1], user: null })
-        } else if (req.user.admin === true){
-            return res.render('admin-specific-post.pug')
-        }else{
+        } else {
             return res.render('specific-post.pug', { post: data[0], comments: data[1], user: req.user.username })
         }
     })
