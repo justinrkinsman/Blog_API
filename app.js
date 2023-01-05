@@ -125,7 +125,7 @@ app.post(
 app.post(
   '/admin/login',
   passport.authenticate("local", {
-    successRedirect: '/admin/success-login',
+    successRedirect: '/admin/dashboard',
     failureRedirect: '/admin/failed-login'
   })
 )
@@ -133,7 +133,7 @@ app.post(
 app.post(
   '/admin/failed-login',
   passport.authenticate("local", {
-    successRedirect: '/admin/success-login',
+    successRedirect: '/admin/dashboard',
     failureRedirect: '/admin/failed-login'
   })
 )
