@@ -136,7 +136,7 @@ router.get('/posts/:id/comments', (req, res, next) => {
     fetch(requestUrl)
     .then(response => response.json())
     .then(async data => {
-        return res.render('comments.pug', {title: "Comments", comments: data})
+        return res.render('admin-comments.pug', {title: "Comments", comments: data})
     })
 })
 
