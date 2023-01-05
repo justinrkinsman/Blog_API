@@ -4,20 +4,22 @@ block content
 
     a(href='/admin/dashboard')
         p Back to Admin Dashboard
-        - let str = JSON.stringify(post)
-        - let parsed = JSON.parse(str)
-        each post in parsed
-            div.post-layout
-                h1 #{post.title}
-                p #{post.timestamp}
-                p #{post.body} 
-            - let commentStr = JSON.stringify(comments)
-            - let commentParsed = JSON.parse(commentStr)
-            if commentParsed.length > 0
-                a(href=`/posts/${post._id}/comments`)
-                    p View all #{commentParsed.length} comments
-                a(href=`/posts/${post._id}/new-comment`)
-                    p Add comment
-            else 
-                a(href=`/posts/${post._id}/new-comment`)
-                    p No comments. Be the first?
+    - let str = JSON.stringify(post)
+    - let parsed = JSON.parse(str)
+    each post in parsed
+        div.post-layout
+            h1 #{post.title}
+            p #{post.timestamp}
+            p #{post.body} 
+        - let commentStr = JSON.stringify(comments)
+        - let commentParsed = JSON.parse(commentStr)
+        if commentParsed.length > 0
+            a(href=`/posts/${post._id}/comments`)
+                p View all #{commentParsed.length} comments
+            a(href=`/posts/${post._id}/new-comment`)
+                p Add comment
+        else 
+            a(href=`/posts/${post._id}/new-comment`)
+                p No comments. Be the first?
+    a(href=`/admin/dashboard`) Edit Post 
+    a(href=`/admin/dashboard`) Delete Post
