@@ -38,4 +38,9 @@ router.get('/failed-login', (req, res) => {
     return res.render('admin-fail.pug')
 })
 
+/* Load new post form */
+router.get('/new-post', (req, res, next) => {
+    res.render('new-post.pug', {title: "Create New Post"})
+})
+
 module.exports = router
