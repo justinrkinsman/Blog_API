@@ -18,10 +18,19 @@ router.get('/login', (req, res, next) => {
 })
 
 router.get('/dashboard', async (req, res) => {
-    if (req.user.admin === true) {
-        return res.render('admin-dashboard.pug', {title: 'Admin Page'})
+    if (req.user.admin !== true) {
+        return res.redirect('/admin/failed-login')
     }
-    return res.redirect('/admin/failed-login')
+    if (req.user.admin === true) {
+        const requestUrl = "http://localhost:3000/api/posts"
+        fetch(requestUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (req.user.admin === true) {
+                return res.render('admin-dashboard.pug', {title: 'Admin Page', posts: data})
+            }
+        }) 
+    } 
 })
 
 router.get('/failed-login', (req, res) => {

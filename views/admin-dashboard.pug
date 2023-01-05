@@ -3,3 +3,12 @@ extends layout
 block content   
 
     h1 Welcome Admin
+    p Logout (does nothing)
+    h1= "Posts"
+    - let str = JSON.stringify(posts)
+    - let parsed = JSON.parse(str)
+    each post in parsed
+      p (href=`/posts/${post._id}` class='link-to-post')
+        div.post-layout
+          h2 #{post.title}
+          p #{post.timestamp}
