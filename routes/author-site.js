@@ -43,4 +43,22 @@ router.get('/new-post', (req, res, next) => {
     res.render('new-post.pug', {title: "Create New Post"})
 })
 
+/* Create new post */
+router.post('/new-post', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts`
+    fetch(requestUrl, {
+        method: "POST",
+        // Try adding this later mode: 'cors',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            "title": req.body.title, 
+            "body": req.body.body, 
+            "published": true })
+    })
+    .then(response => response.json())
+    .then(data => {
+        return res.redirect('/admin/dashboard')
+    })
+})
+
 module.exports = router
