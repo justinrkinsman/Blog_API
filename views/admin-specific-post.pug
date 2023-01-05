@@ -14,7 +14,7 @@ block content
         - let commentStr = JSON.stringify(comments)
         - let commentParsed = JSON.parse(commentStr)
         if commentParsed.length > 0
-            a(href=`/posts/${post._id}/comments`)
+            a(href=`/admin/posts/${post._id}/comments`)
                 p View all #{commentParsed.length} comments
             a(href=`/posts/${post._id}/new-comment`)
                 p Add comment

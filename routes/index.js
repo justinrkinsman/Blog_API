@@ -31,7 +31,6 @@ router.get('/api/posts/:id/comments/:commentId', (req, res) => {
 // GET comments list for specfic post
 router.get('/api/posts/:id/comments', (req, res) => {
     const { id } = req.params;
-    const data = {}
     Comment.find({post: id})
     .sort({db_timestamp: -1})
     .populate('user')
@@ -52,9 +51,9 @@ router.get('/api/posts/:id/delete-post', (req, res) => {
 
 /// POST APIs ///
 //POST login
-router.post('/api/login', (req, res) => {
+/*router.post('/api/login', (req, res) => {
     
-})
+})*/
 
 // POST to create new blog post
 router.post('/api/posts', (req, res) => {

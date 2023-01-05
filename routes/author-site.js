@@ -62,7 +62,7 @@ router.post('/new-post', (req, res, next) => {
 })
 
 /* Load specific post page */
-router.get('/post/:id', (req, res, next) => {
+router.get('/posts/:id', (req, res, next) => {
     const requestUrl = `http://localhost:3000/api/posts/${req.params.id}`
     fetch(requestUrl, {
         credentials: "include"
@@ -127,6 +127,17 @@ router.post('/posts/:id/delete-post', (req, res) => {
         console.log('Error', error)
     })
     res.redirect('/admin/dashboard')
+})
+
+/* Load comments for post */
+router.get('/posts/:id/comments', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments`
+    const user = {}
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(async data => {
+        return res.render('comments.pug', {title: "Comments", comments: data})
+    })
 })
 
 module.exports = router
