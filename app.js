@@ -64,6 +64,13 @@ passport.use(
       })
     })
   )
+  
+/*function isAdmin(req, res, next) {
+    if (req.user.admin === true && req.path==='/admin') {
+      return next()
+    }
+  return res.redirect(403, '/error')
+}*/
 
 passport.serializeUser(function(user, done) {
     done(null, user.id)
@@ -105,6 +112,7 @@ app.use(bodyParser.json())
 app.use('/', indexRouter)
 app.use('/', catalog)
 app.use('/admin', authorSite)
+//app.use(isAdmin)
 
 app.post(
   '/login', 
