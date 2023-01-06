@@ -9,7 +9,7 @@ block content
         a(href=`/admin/posts/${parsed[0].post}`)
             p Back to Post
         each comment in parsed
-            a(href=`/posts/${comment.post}/comments/${comment._id}` class='link-to-comment')
+            a(href=`/admin/posts/${comment.post}/comments/${comment._id}` class='link-to-comment')
                 div.comment-layout
                     p #{comment.body}
                     p #{comment.timestamp}

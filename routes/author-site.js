@@ -159,4 +159,14 @@ router.post('/posts/:id/new-comment', (req, res, next) => {
     })
 })
 
+/* Load specific comment */
+router.get('/posts/:id/comments/:commentId', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/${req.params.commentId}`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render('admin-specific-comment.pug', { title: "Comment Info", comment: data })
+    })
+})
+
 module.exports = router

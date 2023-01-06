@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    a(href='/admin/dashboard')
+        p Back to Admin Dashboard
+    - let str = JSON.stringify(comment)
+    - let parsed = JSON.parse(str)
+    a(href=`/admin/posts/${parsed[0].post}/comments`)
+        p Back to Comments
+    each comment in parsed
+        div.comment-layout
+            p #{comment.body} 
+            p #{comment.timestamp} 
+            p #{comment.user.username}
+        if comment.user.admin
+            a(href=`/admin/posts/${parsed[0].post}/comments/${parsed[0]._id}/edit-comment`) Edit Comment
+        a(href=`/admin/posts/${parsed[0].post}/comments/${parsed[0]._id}/delete-comment`) Delete Comment
