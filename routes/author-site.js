@@ -169,4 +169,33 @@ router.get('/posts/:id/comments/:commentId', (req, res, next) => {
     })
 })
 
+/* GET edit commment page */
+router.get('/posts/:id/comments/:commentId/edit-comment', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/${req.params.commentId}`
+    fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {
+        return res.render(`admin-edit-comment.pug`, {title: "Edit Comment", comment: data})
+    })
+})
+
+/* Edit Comment */
+router.post('/posts/:id/comments/:commentId/edit-comment', (req, res) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments/${req.params.commentId}`
+    
+    fetch(requestUrl, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({"body": req.body.body})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success', data)
+    })
+    .catch((error) => {
+        console.log('Error', error)
+    })
+    res.redirect(`/admin/posts/${req.params.id}/comments/${req.params.commentId}`)
+})
+
 module.exports = router
