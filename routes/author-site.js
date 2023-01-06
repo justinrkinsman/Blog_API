@@ -140,4 +140,23 @@ router.get('/posts/:id/comments', (req, res, next) => {
     })
 })
 
+/* Load new comment page */
+router.get('/posts/:id/new-comment', (req, res, next) => {
+    res.render('admin-new-comment.pug', {title:"Add Comment", user: req.user.username})
+})
+
+/* Add comment to post */
+router.post('/posts/:id/new-comment', (req, res, next) => {
+    const requestUrl = `http://localhost:3000/api/posts/${req.params.id}/comments`
+    fetch(requestUrl, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({"body": req.body.comment, "user": req.user.username})
+    })
+    .then(response => response.json())
+    .then(data => {
+        return res.redirect(`/admin/posts/${req.params.id}/comments`)
+    })
+})
+
 module.exports = router

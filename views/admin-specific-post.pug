@@ -16,10 +16,10 @@ block content
         if commentParsed.length > 0
             a(href=`/admin/posts/${post._id}/comments`)
                 p View all #{commentParsed.length} comments
-            a(href=`/posts/${post._id}/new-comment`)
+            a(href=`/admin/posts/${post._id}/new-comment`)
                 p Add comment
         else 
-            a(href=`/posts/${post._id}/new-comment`)
+            a(href=`/admin/posts/${post._id}/new-comment`)
                 p No comments. Be the first?
         a(href=`/admin/posts/${post._id}/edit-post`) Edit Post 
         a(href=`/admin/posts/${post._id}/delete-post`) Delete Post
